@@ -1,0 +1,331 @@
+/* Color Palette Variables */
+.light-theme {
+  --bg-page: #f0f2f5;
+  --bg-card: #ffffff;
+  --text-main: #333;
+  --text-sub: #777;
+  --input-bg: #f0f2f5;
+  --accent-gradient: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+  --btn-shadow: rgba(58, 123, 213, 0.3);
+  --border-color: #ddd;
+}
+
+.dark-theme {
+  --bg-page: #0b0e14;
+  --bg-card: #1a1d23;
+  --text-main: #e0e0e0;
+  --text-sub: #a0a0a0;
+  --input-bg: #2c313a;
+  --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --btn-shadow: rgba(118, 75, 162, 0.4);
+  --border-color: #3e4042;
+}
+
+/* Base resets and animations */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.page-wrapper {
+  background: var(--bg-page);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  transition: background 0.5s ease;
+  overflow: hidden;
+}
+
+/* Main Container Sliding logic */
+.main-container {
+  background: var(--bg-card);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  width: 850px;
+  max-width: 95%;
+  min-height: 550px;
+}
+.form-wrapper {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+  width: 50%;
+}
+.sign-in-box {
+  left: 0;
+  z-index: 2;
+}
+.sign-up-box {
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+}
+.active .sign-in-box {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.active .sign-up-box {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+}
+
+form {
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  height: 100%;
+  text-align: center;
+}
+input {
+  background: var(--input-bg);
+  color: var(--text-main);
+  border: none;
+  padding: 12px;
+  margin: 6px 0;
+  width: 100%;
+  border-radius: 10px;
+  outline: none;
+  transition: 0.3s;
+  border: 1px solid transparent;
+}
+input:focus {
+  border-color: #667eea;
+  background: var(--bg-card);
+}
+
+/* --- 3D ANIMATED BACKGROUND (OVERLAY) --- */
+.overlay-section {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+.active .overlay-section {
+  transform: translateX(-100%);
+}
+
+.overlay-bg {
+  background: var(--accent-gradient);
+  color: #fff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transition: transform 0.6s ease-in-out;
+}
+.active .overlay-bg {
+  transform: translateX(50%);
+}
+
+.circles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.circles li {
+  position: absolute;
+  display: block;
+  list-style: none;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  animation: animate 25s linear infinite;
+  bottom: -150px;
+  border-radius: 4px;
+}
+
+/* Custom sizes and speeds for 3D depth effect */
+.circles li:nth-child(1) {
+  left: 25%;
+  width: 80px;
+  height: 80px;
+  animation-delay: 0s;
+}
+.circles li:nth-child(2) {
+  left: 10%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 2s;
+  animation-duration: 12s;
+}
+.circles li:nth-child(3) {
+  left: 70%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 4s;
+}
+.circles li:nth-child(4) {
+  left: 40%;
+  width: 60px;
+  height: 60px;
+  animation-delay: 0s;
+  animation-duration: 18s;
+}
+.circles li:nth-child(5) {
+  left: 65%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 0s;
+}
+.circles li:nth-child(6) {
+  left: 75%;
+  width: 110px;
+  height: 110px;
+  animation-delay: 3s;
+}
+.circles li:nth-child(7) {
+  left: 35%;
+  width: 150px;
+  height: 150px;
+  animation-delay: 7s;
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+    border-radius: 0;
+  }
+  100% {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+    border-radius: 50%;
+  }
+}
+
+/* Buttons */
+.social-login-group {
+  width: 100%;
+  margin: 15px 0 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-main);
+  transition: 0.3s;
+}
+.fb-btn {
+  background: #1877f2;
+  color: white;
+  border: none;
+}
+.fb-btn:hover {
+  background: #166fe5;
+  transform: translateY(-2px);
+}
+.google-btn:hover {
+  border-color: #4285f4;
+  background: rgba(66, 133, 244, 0.1);
+}
+
+.action-btn {
+  border-radius: 25px;
+  border: none;
+  background: var(--accent-gradient);
+  color: #fff;
+  padding: 12px 50px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 10px 20px var(--btn-shadow);
+  margin-top: 10px;
+  transition: 0.3s;
+}
+.action-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 25px var(--btn-shadow);
+}
+
+.panel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 30px;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  z-index: 2;
+}
+.panel-right {
+  right: 0;
+}
+.ghost-btn {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  border-radius: 25px;
+  padding: 10px 35px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.ghost-btn:hover {
+  background: #fff;
+  color: #333;
+  transform: scale(1.05);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .main-container {
+    width: 95%;
+    min-height: 600px;
+  }
+  .overlay-section {
+    width: 100%;
+    height: 30%;
+    left: 0;
+    top: 0;
+  }
+  .active .overlay-section {
+    transform: translateY(233%);
+  }
+  .form-wrapper {
+    width: 100%;
+    height: 70%;
+    top: 30%;
+    left: 0;
+  }
+  .active .form-wrapper {
+    transform: translateY(-43%);
+  }
+  .overlay-bg {
+    width: 100%;
+    left: 0;
+    transform: none !important;
+  }
+}
